@@ -1,12 +1,12 @@
-﻿function createDiscoBall(radius = 50) {
-    setDiscoBallSize(radius*2);
+﻿function createDiscoBall(radius = 50, discoBallId) {
+    //setDiscoBallSize(radius * 2, discoBallId);
     var t = 1;
     var squareSize = 6.5 / (50 / radius);
     var prec = 19.55;
     
     var fuzzy = 0.001;
     var inc = (Math.PI - fuzzy) / prec;
-    var discoBall = document.getElementById("discoBall");
+    var discoBall = document.getElementById(discoBallId);
 
     for (var t = fuzzy; t < Math.PI; t += inc) {
         var z = radius * Math.cos(t);
@@ -58,9 +58,19 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function setDiscoBallSize(size) {
-    const discoBallLight = document.querySelector('.discoBallLight');
-    const discoBall = document.querySelector('.discoBall')
-    discoBallLight.style.setProperty('--discoBall-size', `${size}px`);
-    discoBall.style.setProperty('--discoBall-size', `${size}px`);
+function setDiscoBallSize(size, discoBallId) {
+    const discoBallLight = document.getElementById(discoBallId+"-light");
+    const discoBall = document.getElementById(discoBallId)
+
+    discoBall.style.width = size + "px";
+    discoBallLight.style.height = size + "px";
+}
+
+function clearDiscoBall(discoBallGuid) {
+    const discoBall = document.getElementById(discoBallGuid);
+    if (discoBall) {
+        while (discoBall.firstChild) {
+            discoBall.removeChild(discoBall.firstChild);
+        }
+    }
 }

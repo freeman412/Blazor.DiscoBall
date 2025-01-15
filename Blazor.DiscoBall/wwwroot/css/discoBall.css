@@ -67,10 +67,6 @@
     }
 }
 
-:root {
-    --discoBall-size: 100px;
-}
-
 .discoBallContainer {
     position: relative; /* The parent container for positioning */
     width: 100%; /* Can be adjusted based on your needs */
@@ -80,20 +76,16 @@
 
 .discoBall {
     transform-style: preserve-3d;
-    width: var(--discoBall-size);
-    height: var(--discoBall-size);
     position: absolute; /* Position relative to the parent container */
     animation: rotateDiscoBall 18s linear infinite;
 }
 
 .discoBallLight {
-    width: var(--discoBall-size);
-    height: var(--discoBall-size);
     position: absolute; /* Position relative to the parent container */
     border-radius: 100%;
     background-color: white;
     opacity: 0.2;
-    filter: blur(20px);
+    -webkit-filter: blur(20px);
 }
 
 .square {

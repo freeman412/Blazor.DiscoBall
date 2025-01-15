@@ -1,15 +1,26 @@
-﻿@page "/disco"
-
+﻿@page "/"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
+@using Blazor.DiscoBall.Components
 
 <PageTitle>Disco Ball!</PageTitle>
 
-<div style="margin-top: 100px; margin-left: 400px">
-        <DiscoBall Radius="@DiscoBall.DiscoBallSize.Tiny"></DiscoBall>
-
+<div style="margin-top: 100px; margin-left: 400px; text-align: center;">
+    <DiscoBall Radius="@currentRadius"></DiscoBall>
+    <div style="margin-top: 20px;">
+        <input type="number" @bind="inputRadius" style="width: 80px; text-align: center;" />
+        <button @onclick="ApplyRadius">Apply Radius</button>
+    </div>
 </div>
 
-
 @code {
+    private int currentRadius = DiscoBall.DiscoBallSize.Medium; // Default radius
+    private int inputRadius = DiscoBall.DiscoBallSize.Medium;  // Text field value
 
-} 
+    private void ApplyRadius()
+    {
+        if (inputRadius > 0)
+        {
+            currentRadius = inputRadius; // Apply the new radius
+        }
+    }
+}
