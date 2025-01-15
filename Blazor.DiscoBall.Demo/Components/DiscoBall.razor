@@ -1,0 +1,51 @@
+﻿@inject IJSRuntime JS
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<div style="display: block; justify-content: center; align-items: center; 
+        position: relative;
+        width: 100px; height: 100px;">
+    <div class="discoBallLight" id="discoBallLight"></div>
+    <div class="discoBall" id="discoBall">
+        <div class="discoBallMiddle" id="discoBallMiddle"></div>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string Radius { get; set; } = DiscoBallSize.Small;
+    private DiscoBallSize _ballSize;
+
+    protected override Task OnParametersSetAsync()
+    {
+        _ballSize = new DiscoBallSize(Radius);
+        return base.OnParametersSetAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("createDiscoBall", _ballSize.Radius);
+        }
+    }
+
+    public class DiscoBallSize
+    {
+        public static string Tiny = "Tiny";
+        public static string Small = "Small";
+        public static string Medium = "Medium";
+        public static string Large = "Large";
+        public int Radius = 50;
+
+        public DiscoBallSize(string size)
+        {
+            if (size == Small)
+                Radius = 50;
+            else if (size == Medium)
+                Radius = 100;
+            else if (size == Large)
+                Radius = 400;
+            else if (size == Tiny)
+                Radius = 25;
+        }
+    }
+}
