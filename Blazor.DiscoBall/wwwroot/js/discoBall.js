@@ -1,9 +1,20 @@
-﻿function createDiscoBall(radius = 50, discoBallId) {
+﻿function createDiscoBall(radius = 50, discoBallId, isColorful=false) {
     //setDiscoBallSize(radius * 2, discoBallId);
     var t = 1;
-    var squareSize = 6.5 / (50 / radius);
-    var prec = 19.55;
-    
+    var baseSquareSize = 6.5;
+    var squareSize = baseSquareSize / (50 / radius);
+   
+    var basePrec = 19.55;
+
+    if (radius <= 50) { prec = basePrec; }
+    else {
+        //var squareSize = baseSquareSize / Math.log10(radius / 50 + .5);
+       //prec = basePrec * Math.pow(radius / 50, .3);
+        //var prec = basePrec * (radius / 50);
+        //squareSize = squareSize * .65;
+        
+    }
+
     var fuzzy = 0.001;
     var inc = (Math.PI - fuzzy) / prec;
     var discoBall = document.getElementById(discoBallId);
@@ -24,9 +35,9 @@
             squareTile.style.webkitTransform = "rotate(" + i + "rad) rotateY(" + t + "rad)";
             squareTile.style.transform = "rotate(" + i + "rad) rotateY(" + t + "rad)";
             if ((t > 1.3 && t < 1.9) || (t < -1.3 && t > -1.9)) {
-                squareTile.style.backgroundColor = randomColor("bright");
+                squareTile.style.backgroundColor = randomColor("bright", isColorful);
             } else {
-                squareTile.style.backgroundColor = randomColor("any");
+                squareTile.style.backgroundColor = randomColor("any", isColorful);
             }
             square.appendChild(squareTile);
             square.className = "square";
@@ -44,12 +55,16 @@
     }
 }
 
-function randomColor(type) {
+function randomColor(type, isColorful) {
     var c;
     if (type == "bright") {
         c = randomNumber(130, 255);
     } else {
         c = randomNumber(110, 190);
+    }
+    if (isColorful)
+    {
+        return  "rgb(" + randomNumber(0, 255) + "," + randomNumber(0, 255) + "," + randomNumber(0, 255) + ")";
     }
     return "rgb(" + c + "," + c + "," + c + ")";
 }
@@ -72,5 +87,19 @@ function clearDiscoBall(discoBallGuid) {
         while (discoBall.firstChild) {
             discoBall.removeChild(discoBall.firstChild);
         }
+    }
+}
+
+function pauseDiscoBall(discoBallId) {
+    const discoBall = document.getElementById(discoBallId);
+    if (discoBall) {
+        discoBall.classList.add('paused');
+    }
+}
+
+function restartDiscoBall(discoBallId) {
+    const discoBall = document.getElementById(discoBallId);
+    if (discoBall) {
+        discoBall.classList.remove('paused');
     }
 }

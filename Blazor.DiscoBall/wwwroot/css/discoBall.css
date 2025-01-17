@@ -98,6 +98,11 @@
     transform: rotateX(90deg) rotateY(0deg) translateZ(0px);
 }
 
+.squareTile {
+    background-color: #fff; /* Default color */
+    transition: background-color 0.5s;
+}
+
 .discoBallMiddle {
     height: 100%;
     border-radius: 100%;
@@ -108,4 +113,9 @@
     background: linear-gradient(top, #111, #333);
     -webkit-animation: rotateDiscoBallMiddle 18s linear infinite;
     animation: rotateDiscoBallMiddle 18s linear infinite;
+}
+
+.paused {
+    animation-play-state: paused !important;
+    -webkit-animation-play-state: paused !important;
 }

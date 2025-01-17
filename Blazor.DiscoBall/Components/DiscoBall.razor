@@ -1,5 +1,4 @@
 ﻿@inject IJSRuntime JS
-@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <div style="display: block; justify-content: center; align-items: center; 
         position: relative;
@@ -9,24 +8,32 @@
         <div class="discoBallMiddle" id="discoBallMiddle"></div>
     </div>
 </div>
-@code {
 
+@code {
+    /// <summary>
+    /// The Radius of the Disco Ball in pixels.
+    /// </summary>
     [Parameter]
     public int Radius { get; set; } = DiscoBallSize.Small;
+    [Parameter]
+    public bool IsColorful { get; set; } = false;
+
     private Guid _discoBallGuid = Guid.NewGuid();
     private int _previousRadius;
+    private bool _initialized;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender && !_initialized)
         {
-            await JS.InvokeVoidAsync("createDiscoBall", Radius, _discoBallGuid);
+            _initialized = true;
+            await JS.InvokeVoidAsync("createDiscoBall", Radius, _discoBallGuid, IsColorful);
         }
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_previousRadius != Radius)
+        if (_previousRadius != Radius && _initialized)
         {
             // Handle the change in Radius
             await RedrawDiscoBall();
@@ -37,7 +44,17 @@
     private async Task RedrawDiscoBall()
     {
         await JS.InvokeVoidAsync("clearDiscoBall", _discoBallGuid); // Clear existing disco ball elements
-        await JS.InvokeVoidAsync("createDiscoBall", Radius, _discoBallGuid); // Create new disco ball
+        await JS.InvokeVoidAsync("createDiscoBall", Radius, _discoBallGuid, IsColorful); // Create new disco ball
+    }
+
+    public async Task PauseDiscoBall()
+    {
+        await JS.InvokeVoidAsync("pauseDiscoBall", _discoBallGuid.ToString());
+    }
+
+    public async Task RestartDiscoBall()
+    {
+        await JS.InvokeVoidAsync("restartDiscoBall", _discoBallGuid.ToString());
     }
 
     public class DiscoBallSize
@@ -45,7 +62,7 @@
         public static int Tiny = 25;
         public static int Small = 50;
         public static int Medium = 100;
-        public static int Large = 200;
-        public static int XLarge = 400;
+        public static int Large = 150;
+        public static int XLarge = 200;
     }
 }

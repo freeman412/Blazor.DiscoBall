@@ -5,7 +5,9 @@
 <PageTitle>Disco Ball!</PageTitle>
 
 <div style="margin-top: 100px; margin-left: 400px; text-align: center;">
-    <DiscoBall Radius="@currentRadius"></DiscoBall>
+    <DiscoBall Radius="@currentRadius" IsColorful="true"></DiscoBall>
+    <DiscoBall Radius="@(currentRadius*2)" IsColorful="true"></DiscoBall>
+    <DiscoBall Radius="@(currentRadius/2)"></DiscoBall>
     <div style="margin-top: 20px;">
         <input type="number" @bind="inputRadius" style="width: 80px; text-align: center;" />
         <button @onclick="ApplyRadius">Apply Radius</button>

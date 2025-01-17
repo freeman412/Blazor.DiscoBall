@@ -13,11 +13,11 @@
 
     <link href="_content/Blazor.DiscoBall/css/discoBall.css" rel="stylesheet" />
 
-    <HeadOutlet />
+    <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
 <body>
-    <Routes />
+    <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
 
     <script src="_content/Blazor.Discoball/js/discoBall.js"></script>
