@@ -8,7 +8,22 @@
 	  <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Blazor.DiscoBall</Title>
-	  <Version>1.0.1</Version>
+	  <Version>1.0.2</Version>
 	  <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+	  <PackageIcon>DiscoBallLogo.png</PackageIcon>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <RepositoryUrl>https://github.com/freeman412/Blazor.DiscoBall</RepositoryUrl>
+	  <PackageTags>blazor; disco; discoball; ball; party;</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\DiscoBallLogo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 </Project>

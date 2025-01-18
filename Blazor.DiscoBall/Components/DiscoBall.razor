@@ -15,29 +15,54 @@
     /// </summary>
     [Parameter]
     public int Radius { get; set; } = DiscoBallSize.Small;
+    /// <summary>
+    /// Whether or not the Disco Ball should be colorful.
+    /// </summary>
     [Parameter]
     public bool IsColorful { get; set; } = false;
+    /// <summary>
+    /// Whether or not the Disco Ball should have motion.
+    /// </summary>
+    [Parameter]
+    public bool Motion { get; set; } = true;
 
     private Guid _discoBallGuid = Guid.NewGuid();
     private int _previousRadius;
     private bool _initialized;
+    private bool _previousMotion;
+    private bool _previousIsColorful;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && !_initialized)
         {
-            _initialized = true;
             await JS.InvokeVoidAsync("createDiscoBall", Radius, _discoBallGuid, IsColorful);
+            _previousRadius = Radius;
+            _previousMotion = Motion;
+            _previousIsColorful = IsColorful;
+            _initialized = true;
         }
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_previousRadius != Radius && _initialized)
+        if (_initialized)
         {
-            // Handle the change in Radius
-            await RedrawDiscoBall();
-            _previousRadius = Radius; // Update the previous radius
+            if (_previousRadius != Radius | _previousIsColorful != IsColorful)
+            {
+                // Handle the change in Radius
+                await RedrawDiscoBall();
+                _previousRadius = Radius; // Update the previous radius
+                _previousIsColorful = IsColorful;
+            }
+            if (_previousMotion != Motion)
+            {
+                if (_previousMotion == false && Motion == true)
+                    await RestartDiscoBall();
+                if(_previousMotion == true && Motion == false)
+                    await PauseDiscoBall();
+                _previousMotion = Motion;
+            }
         }
     }
 
@@ -47,12 +72,12 @@
         await JS.InvokeVoidAsync("createDiscoBall", Radius, _discoBallGuid, IsColorful); // Create new disco ball
     }
 
-    public async Task PauseDiscoBall()
+    private async Task PauseDiscoBall()
     {
         await JS.InvokeVoidAsync("pauseDiscoBall", _discoBallGuid.ToString());
     }
 
-    public async Task RestartDiscoBall()
+    private async Task RestartDiscoBall()
     {
         await JS.InvokeVoidAsync("restartDiscoBall", _discoBallGuid.ToString());
     }

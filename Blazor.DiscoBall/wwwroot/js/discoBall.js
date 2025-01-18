@@ -4,16 +4,8 @@
     var baseSquareSize = 6.5;
     var squareSize = baseSquareSize / (50 / radius);
    
-    var basePrec = 19.55;
+    var prec = 19.55;
 
-    if (radius <= 50) { prec = basePrec; }
-    else {
-        //var squareSize = baseSquareSize / Math.log10(radius / 50 + .5);
-       //prec = basePrec * Math.pow(radius / 50, .3);
-        //var prec = basePrec * (radius / 50);
-        //squareSize = squareSize * .65;
-        
-    }
 
     var fuzzy = 0.001;
     var inc = (Math.PI - fuzzy) / prec;

@@ -5,10 +5,7 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.DiscoBall", "Blazor.DiscoBall\Blazor.DiscoBall.csproj", "{3D0A1A1D-9D4B-4117-A040-494BA819B445}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.DiscoBall.Demo", "Blazor.DiscoBall.Demo\Blazor.DiscoBall.Demo.csproj", "{57EA28FD-8E30-48BE-8964-FEBF86287EAD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3D0A1A1D-9D4B-4117-A040-494BA819B445} = {3D0A1A1D-9D4B-4117-A040-494BA819B445}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MudBlazor.DiscoBall.Demo", "MudBlazor.DiscoBall.Demo\MudBlazor.DiscoBall.Demo.csproj", "{7DE65A33-151F-4749-B9B3-357A4F0CCAB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +17,10 @@ Global
 		{3D0A1A1D-9D4B-4117-A040-494BA819B445}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D0A1A1D-9D4B-4117-A040-494BA819B445}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D0A1A1D-9D4B-4117-A040-494BA819B445}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57EA28FD-8E30-48BE-8964-FEBF86287EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57EA28FD-8E30-48BE-8964-FEBF86287EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57EA28FD-8E30-48BE-8964-FEBF86287EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57EA28FD-8E30-48BE-8964-FEBF86287EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DE65A33-151F-4749-B9B3-357A4F0CCAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE65A33-151F-4749-B9B3-357A4F0CCAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DE65A33-151F-4749-B9B3-357A4F0CCAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DE65A33-151F-4749-B9B3-357A4F0CCAB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

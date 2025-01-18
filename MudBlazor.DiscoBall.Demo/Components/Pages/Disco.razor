@@ -1,0 +1,40 @@
+﻿@page "/"
+@using Blazor.DiscoBall.Components
+
+<PageTitle>Disco Ball!</PageTitle>
+
+<MudGrid Spacing="4">
+    <MudItem xs="6">
+        <DiscoBall @ref="@_discoBall" Radius="@currentRadius" IsColorful="@_isColorful" Motion="@_motion"></DiscoBall>
+        <input type="number" @bind="inputRadius" style="width: 80px; text-align: center;" />
+        <MudButton OnClick="ApplyRadius">Apply Radius</MudButton>
+        <MudGrid Spacing="0">
+            <MudItem>
+                <MudSwitch Label="Color" @bind-Value="_isColorful" Color="Color.Primary" />
+            </MudItem>
+            <MudItem>
+                <MudToggleIconButton Icon="@Icons.Material.Filled.PlayArrow" ToggledIcon="@Icons.Material.Filled.Pause" @bind-Toggled="@_motion"></MudToggleIconButton>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+
+    <MudItem></MudItem>
+</MudGrid>
+
+
+@code {
+    private int currentRadius = DiscoBall.DiscoBallSize.Medium; // Default radius
+    private int inputRadius = DiscoBall.DiscoBallSize.Medium;  // Text field value
+    private DiscoBall _discoBall;
+    private bool _isColorful = false;
+    private bool _motion = true;
+
+    private void ApplyRadius()
+    {
+        if (inputRadius > 0)
+        {
+            currentRadius = inputRadius; // Apply the new radius
+        }
+    }
+
+}
