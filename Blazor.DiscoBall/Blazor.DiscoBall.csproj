@@ -8,7 +8,7 @@
 	  <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Blazor.DiscoBall</Title>
-	  <Version>1.0.2</Version>
+	  <Version>1.0.3</Version>
 	  <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 	  <PackageIcon>DiscoBallLogo.png</PackageIcon>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
